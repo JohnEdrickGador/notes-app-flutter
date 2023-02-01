@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "55345862060",
+    "project_id": "notes-app-edrick",
+    "storage_bucket": "notes-app-edrick.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55345862060:android:f3465a324cb2e868d71609",
+        "android_client_info": {
+          "package_name": "com.example.flutter_course_beginner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55345862060-fj1snel47tk66vi7aar8uphruitjf7jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAEsrccSDevxaPg79G8zWH8AGO4bEwDlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55345862060-fj1snel47tk66vi7aar8uphruitjf7jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
