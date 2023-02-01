@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
               //if user does not exist or not logged in
               return const LoginView();
             }
-            return Text("Done");
+            return const Text("Done");
           default:
             return const CircularProgressIndicator();
         }
