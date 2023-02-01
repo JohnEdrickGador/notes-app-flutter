@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
             if (user != null) {
               //check if user exists
               if (user.emailVerified) {
-                print("Email is verified");
+                return const NotesView(); //main UI of the application
               } else {
                 return const VerifyEmailView();
               }
@@ -55,11 +55,45 @@ class HomePage extends StatelessWidget {
               //if user does not exist or not logged in
               return const LoginView();
             }
-            return const Text("Done");
+
           default:
             return const CircularProgressIndicator();
         }
       },
+    );
+  }
+}
+
+enum MenuActions { logout }
+
+class NotesView extends StatefulWidget {
+  const NotesView({super.key});
+
+  @override
+  State<NotesView> createState() => _NotesViewState();
+}
+
+class _NotesViewState extends State<NotesView> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Main Interface'),
+        actions: [
+          PopupMenuButton<MenuActions>(
+            onSelected: (value) {},
+            itemBuilder: (context) {
+              return [
+                const PopupMenuItem<MenuActions>(
+                  value: MenuActions.logout,
+                  child: Text("Logout"),
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
+      body: const Text("Hello, user!"),
     );
   }
 }
