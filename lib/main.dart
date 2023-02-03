@@ -7,6 +7,7 @@ import 'package:flutter_course_beginner/firebase_options.dart';
 import 'views/login_view.dart';
 import 'views/register_view.dart';
 import 'views/verify_email_view.dart';
+import 'constants/routes.dart';
 import 'dart:developer' show log;
 
 void main() {
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: {
-        '/login/': ((context) => const LoginView()),
-        '/register/': ((context) => const RegisterView()),
-        '/notes/': ((context) => const NotesView()),
+        loginRoute: ((context) => const LoginView()),
+        registerRoute: ((context) => const RegisterView()),
+        notesRoute: ((context) => const NotesView()),
       },
     );
   }
