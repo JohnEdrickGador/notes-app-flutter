@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_course_beginner/firebase_options.dart';
 import 'package:flutter_course_beginner/services/auth/auth_provider.dart'; //we need this because this will serve as the template for firebase auth provider
 import 'package:flutter_course_beginner/services/auth/auth_user.dart'; //we need this since auth_provider.dart methods return auth_user
 import 'package:flutter_course_beginner/services/auth/auth_exceptions.dart';
@@ -101,5 +103,11 @@ class FirebaseAuthProvider implements AuthProvider {
     } else {
       throw UserNotLoggedInAuthException();
     }
+  }
+
+  @override
+  Future<void> initialize() async {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
   }
 }
