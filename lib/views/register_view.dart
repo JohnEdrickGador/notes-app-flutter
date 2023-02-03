@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'dart:developer' show log;
-
 import 'package:flutter_course_beginner/constants/routes.dart';
+import 'package:flutter_course_beginner/utilities/show_error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -69,19 +68,22 @@ class _RegisterViewState extends State<RegisterView> {
                   password: password,
                 );
 
-                log(userCredentials.toString());
                 _email.clear();
                 _password.clear();
               } on FirebaseAuthException catch (e) {
                 if (e.code == "weak-password") {
-                  log("Weak password");
+                  await showErrorDialog(context, "Weak Password");
                 } else if (e.code == "email-already-in-use") {
-                  log("email is already taken");
+                  await showErrorDialog(context, "Email already taken");
                 } else if (e.code == "invalid-email") {
-                  log("Invalid email");
+                  await showErrorDialog(context, "Invalid email");
                 } else if (e.code == "missing-email") {
-                  log("Email field can't be empty");
+                  await showErrorDialog(context, "Email field cannot be empty");
+                } else {
+                  await showErrorDialog(context, "Error: ${e.code.toString()}");
                 }
+              } catch (e) {
+                await showErrorDialog(context, "Error: ${e.toString()}");
               }
             },
             child: const Text('Register'),
