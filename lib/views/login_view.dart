@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' show log;
+import 'package:flutter_course_beginner/constants/routes.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter_course_beginner/firebase_options.dart';
 
@@ -69,7 +70,7 @@ class _LoginViewState extends State<LoginView> {
                 );
                 log(userCredentials.toString());
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/notes/',
+                  notesRoute,
                   (route) => false,
                 );
               } on FirebaseAuthException catch (e) {
@@ -88,7 +89,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
             onPressed: (() {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                '/register/',
+                registerRoute,
                 (route) => false,
               );
             }),
