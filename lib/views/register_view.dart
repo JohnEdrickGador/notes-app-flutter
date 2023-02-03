@@ -66,7 +66,7 @@ class _RegisterViewState extends State<RegisterView> {
                     .createUserWithEmailAndPassword(
                         email: email, password: password);
 
-                print(userCredentials);
+                log(userCredentials.toString());
                 _email.clear();
                 _password.clear();
               } on FirebaseAuthException catch (e) {
