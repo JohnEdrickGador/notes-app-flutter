@@ -1,8 +1,8 @@
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter_course_beginner/firebase_options.dart';
-import 'dart:developer' show log;
+
+import 'package:flutter_course_beginner/constants/routes.dart';
+import 'package:flutter_course_beginner/utilities/show_error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -62,25 +62,32 @@ class _RegisterViewState extends State<RegisterView> {
               final password = _password.text;
 
               try {
-                final userCredentials =
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
 
-                log(userCredentials.toString());
+                final user = FirebaseAuth.instance.currentUser;
+                await user?.sendEmailVerification();
+
+                Navigator.of(context).pushNamed(verifyEmailRoute);
+
                 _email.clear();
                 _password.clear();
               } on FirebaseAuthException catch (e) {
                 if (e.code == "weak-password") {
-                  log("Weak password");
+                  await showErrorDialog(context, "Weak Password");
                 } else if (e.code == "email-already-in-use") {
-                  log("email is already taken");
+                  await showErrorDialog(context, "Email already taken");
                 } else if (e.code == "invalid-email") {
-                  log("Invalid email");
+                  await showErrorDialog(context, "Invalid email");
                 } else if (e.code == "missing-email") {
-                  log("Email field can't be empty");
+                  await showErrorDialog(context, "Email field cannot be empty");
+                } else {
+                  await showErrorDialog(context, "Error: ${e.code.toString()}");
                 }
+              } catch (e) {
+                await showErrorDialog(context, "Error: ${e.toString()}");
               }
             },
             child: const Text('Register'),
@@ -88,7 +95,7 @@ class _RegisterViewState extends State<RegisterView> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                '/login/',
+                loginRoute,
                 (route) => false,
               );
             },

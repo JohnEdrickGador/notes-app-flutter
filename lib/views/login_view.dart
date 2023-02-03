@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' show log;
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:flutter_course_beginner/firebase_options.dart';
+import 'package:flutter_course_beginner/constants/routes.dart';
+
+import '../utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -62,22 +62,35 @@ class _LoginViewState extends State<LoginView> {
               final password = _password.text;
 
               try {
-                final userCredentials =
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                final user = FirebaseAuth.instance.currentUser;
+                await FirebaseAuth.instance.signInWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
-                log(userCredentials.toString());
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/notes/',
-                  (route) => false,
-                );
+
+                if (user?.emailVerified ?? false) {
+                  //user email is verified
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    notesRoute,
+                    (route) => false,
+                  );
+                } else {
+                  //user is not verified
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    verifyEmailRoute,
+                    (route) => false,
+                  );
+                }
               } on FirebaseAuthException catch (e) {
                 if (e.code == "user-not-found") {
-                  log("User not found");
+                  await showErrorDialog(context, "User not found");
                 } else if (e.code == "wrong-password") {
-                  log("Wrong password");
+                  await showErrorDialog(context, "Wrong credentials");
+                } else {
+                  await showErrorDialog(context, "Error: ${e.code.toString()}");
                 }
+              } catch (e) {
+                await showErrorDialog(context, "Error: ${e.toString()}");
               }
 
               _email.clear();
@@ -88,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
             onPressed: (() {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                '/register/',
+                registerRoute,
                 (route) => false,
               );
             }),
