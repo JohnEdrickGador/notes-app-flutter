@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' show log;
 import 'package:flutter_course_beginner/constants/routes.dart';
 
 import '../utilities/show_error_dialog.dart';
@@ -68,7 +67,6 @@ class _LoginViewState extends State<LoginView> {
                   email: email,
                   password: password,
                 );
-                log(userCredentials.toString());
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   notesRoute,
                   (route) => false,
