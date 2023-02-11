@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_beginner/constants/routes.dart';
+import 'package:flutter_course_beginner/enums/menu_action.dart';
 import 'package:flutter_course_beginner/services/auth/auth_service.dart';
 import 'package:flutter_course_beginner/services/crud/notes_services.dart';
-
-import '../../constants/routes.dart';
-import '../../enums/menu_action.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
