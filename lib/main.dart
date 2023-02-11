@@ -2,9 +2,10 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_course_beginner/firebase_options.dart';
-import 'package:flutter_course_beginner/services/auth/auth_service.dart';
 
+import 'services/auth/auth_service.dart';
 import 'views/login_view.dart';
+import 'views/notes/new_note_view.dart';
 import 'views/notes/notes_view.dart';
 import 'views/register_view.dart';
 import 'views/verify_email_view.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         registerRoute: ((context) => const RegisterView()),
         notesRoute: ((context) => const NotesView()),
         verifyEmailRoute: (context) => const VerifyEmailView(),
+        newNoteRoute: (context) => const NewNoteView(),
       },
     );
   }
