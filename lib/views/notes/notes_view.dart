@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_beginner/services/auth/auth_service.dart';
 import 'package:flutter_course_beginner/services/crud/notes_services.dart';
 
-import '../constants/routes.dart';
-import '../enums/menu_action.dart';
+import '../../constants/routes.dart';
+import '../../enums/menu_action.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -35,7 +35,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Main Interface'),
+        title: const Text('Your Notes'),
         actions: [
           PopupMenuButton<MenuActions>(
             onSelected: (value) async {
@@ -82,6 +82,10 @@ class _NotesViewState extends State<NotesView> {
               return const CircularProgressIndicator();
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
