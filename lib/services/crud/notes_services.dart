@@ -234,7 +234,7 @@ class NotesService {
   }
 
   //update notes
-  Future<DatabaseNote> updateNotes({
+  Future<DatabaseNote> updateNote({
     required DatabaseNote note,
     required String text,
   }) async {
